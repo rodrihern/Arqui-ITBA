@@ -1,0 +1,78 @@
+================================================================================
+Compilacion
+================================================================================
+Para generar el ejecutable, primero es necesario generar los archivos objeto, 
+
+$> nasm -f elf 2_hello.asm
+$> nasm -f elf 2_libasm.asm
+
+Luego, es necesario linkearlo, y resolver los valores no resueltos.
+
+$> ld -m elf_i386 2_hello.o 2_libasm.o -o 2_hello
+
+El programa está listo para correr, y ya poseé los permisos necesarios.
+
+$> ./2_hello
+
+
+================================================================================
+Acá se separó el programa principal de la las funciones de utilería
+================================================================================
+Al declararse cómo EXTERN las funciones print y exit, en compilador, cuando
+genere el archivo objeto, va a dejar una tabla diciendo que dichos datos fantan
+definir. Cuando se linkedite con la biblioteca, estos se van a determinar, lo
+que va a permitir llamar las funciones mencionadas.
+
+Cuando se llama a una funcion, es buena práctica, dejar el estado del procesador
+como se recibió. Considere un caso, donde hay un ciclo que compara con el flag
+Z, que llama a una función, que lo altera.
+
+Ej:
+	...
+	dec ecx
+	call procesar	
+	jz fin
+
+fin:	
+	...
+
+Suponiendo que procesar es una función que recibe por ecx un numero, (el del
+contador, que se espera que llegue a 0) y resulta que realiza operaciones que
+cambian el flag Z, un programador podría pasar inadverdido, y jamas terminar el
+ciclo.
+
+
+================================================================================
+Etiquetas
+================================================================================
+El compilador cuenta con una estructura de datos interna llamada Tabla de
+Simbolos. Alli anota la direccion que asocia a las distintas declaraciones de
+etiquetas que va encontrando durante el ensamblado. Al fin de cuentas, las
+etiquetas son números que representan direcciones de memoria. Es una herramienta
+que los lenguajes emsabladores nos proporcionan para no tener que estar
+calculandolas a mano.
+
+Pero resulta que cuando uno escribe una biblioteca, los nombres se empiezan a
+agotar. Por lo tanto, existe la posibilidad de crear etiquetas locales, que
+quedan en el scope, de la etiqueta general declarada anteriormente.
+
+Esto se hace con el punto por delante...
+
+funcion1:
+	
+.loop:
+	...
+	jmp .loop
+
+funcion2:
+
+.loop:
+	...
+	jmp .loop
+
+Las etiquetas loop, se llaman igual, ¿A donde salta el jmp?. Salta a la que
+corresponde por ser local.
+
+
+
+
