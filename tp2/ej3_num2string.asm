@@ -2,8 +2,12 @@ section .text
     global toString
 
 toString:
-    ; El número a convertir está en RAX
+    ; El número a convertir está en EDX:EAX
     ; La dirección del buffer está en RBX
+
+    push rax
+    push rcx
+    push r8
 
     mov rcx, 0  	    ; contador para longitud
     mov r8, 10          ; constante 10
@@ -26,6 +30,12 @@ toString:
         jl .loop2
 
     mov byte [rbx + rax], 0
+
+    pop r8
+    pop rcx
+    pop rax
+
+
     ret
 
 section .bss

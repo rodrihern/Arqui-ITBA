@@ -6,7 +6,6 @@
 
 Tambien están de R8 - R12
 
-
 ## Compilación y linkedición
 
 En 32 bits:
@@ -23,4 +22,32 @@ nasm -f elf64 file.asm
 ld -m elf_x86_64 file.o
 ````
 
-## Codigo típico
+## Boiler plate code
+
+### codigo para empezar un programa
+```asm
+section .text
+
+GLOBAL _start
+
+_start:
+
+
+    mov eax, 1		; ID del Syscall EXIT
+	mov ebx, 0		; Valor de Retorno
+	int 80h		    ; Ejecucion de la llamada
+
+section .data
+
+
+section .bss
+```
+
+### codigo para imprimir en pantalla
+```asm
+    mov ecx, cadena 	    ; Puntero a la cadena
+	mov edx, longitud	; Largo de la cadena 
+	mov ebx, 1		    ; FileDescriptor (STDOUT)
+	mov eax, 4		    ; ID del Syscall WRITE
+	int 80h		        ; Ejecucion de la llamada
+```
