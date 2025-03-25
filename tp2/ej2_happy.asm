@@ -5,23 +5,23 @@ GLOBAL _start
 _start:
     mov eax, 0       ; el i del iterador
 
-loop:
+.loop:
     mov bh, [msg + eax]
     cmp bh, 'a'     ; si es menor que la a salteo
-    jl next
+    jl .next
     cmp bh, 'z'     ; si es mayor a z la salteo
-    jg next
-    ; ahora si vamos a pasarla a mayuscula
+    jg .next
+    
     sub bh, 'a'
-    add bh, 'A'
+    add bh, 'A'     ; ahora si vamos a pasarla a mayuscula
     mov [msg + eax], bh
 
-next:
+.next:
     add eax, 1
     cmp eax, len
-    jl loop
+    jl .loop
 
-done:
+.done:
     mov ecx, msg 	; Puntero a la cadena
 	mov edx, len	; Largo de la cadena 
 	mov ebx, 1		; FileDescriptor (STDOUT)
