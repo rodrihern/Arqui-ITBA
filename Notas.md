@@ -11,7 +11,7 @@ Tambien están de R8 - R12
 En 32 bits:
 
 ````bash
-nasm -f elf32 file.asm
+nasm -f elf file.asm
 ld -m elf_i386 file.o
 ````
 

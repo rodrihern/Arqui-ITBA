@@ -47,7 +47,7 @@ factorial:
         call toString
 
         mov ecx, ans 	    ; Puntero a la cadena
-        mov edx, 10	; Largo de la cadena 
+        mov edx, 10	        ; Largo de la cadena 
         mov ebx, 1		    ; FileDescriptor (STDOUT)
         mov eax, 4		    ; ID del Syscall WRITE
         int 80h		        ; Ejecucion de la llamada

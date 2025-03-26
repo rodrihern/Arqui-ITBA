@@ -27,15 +27,14 @@ _start:
         cmp ecx, eax
         je .done
 
-        push ebx
-        push dword [esp + edx]    ; imprimo el argumento
-        call print                  ;TODO: LEER COMO LLAMAR ESTO
+        
+        mov ebx, [esp + edx]    
+        call print              ; imprimo el argumento                 
         call printNewLine
-        pop ebx
-        pop ebx
+        
 
         inc ecx
-        add ebx, 4          ; aumento el contador y corro el offset
+        add edx, 4          ; aumento el contador y corro el offset
         jmp .loop
 
 

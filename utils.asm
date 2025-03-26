@@ -106,7 +106,7 @@ numtostr:
 	ADD EBX,9               ; me posiciono al final del string para empezar a colocar
 	mov byte [ebx], 0       ; los caracteres ASCII de derecha a izquierda comenzando con cero
 	dec ebx                 ; binario
-.sigo	
+.sigo:	
 	DIV ECX
 	OR Dl, 0x30  ; convierto el resto  menor a 10 a ASCII
 	mov byte [ebx], Dl  
@@ -115,7 +115,7 @@ numtostr:
 	jz .termino
 	mov edx,0
 	jmp .sigo
-.termino
+.termino:
 	inc ebx
 	call print
 	POPAD
