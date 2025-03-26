@@ -4,6 +4,7 @@
 
 
 GLOBAL print
+GLOBAL printNewLine
 GLOBAL exit
 GLOBAL numtostr
 
@@ -28,6 +29,21 @@ print:
 	
 	popad 		; restauro los registros
 	ret	
+
+;===============================================================================
+; imprime un \n en pantalla
+;===============================================================================
+printNewLine:
+	pushad
+
+	mov ecx, new_line 	    ; Puntero a la cadena
+	mov edx, 1				; Largo de la cadena 
+	mov ebx, 1		    	; FileDescriptor (STDOUT)
+	mov eax, 4		    	; ID del Syscall WRITE
+	int 80h		        	; Ejecucion de la llamada
+
+	popad
+	ret
 
 	
 ;===============================================================================
@@ -72,12 +88,11 @@ strlen:
 
 
 ;===============================================================================
-; numtostr - convierte un entero en un string guardandolo en 
-; el stack
+; numtostr - imprime en pantalla un numero y lo deja el string en memoria
 ;===============================================================================
 ; Argumentos:
-;	el numero entero de 32 bit que se recibe en el stack
-; ESP +4 a convertir
+; 	direccion de memoria para guardar el string (ESP+8)
+;	el numero entero de 32 bit convertir (ESP+4)
 ; Retorno:
 ;	los caracteres ASCII en el stack se devuelven  
 ;===============================================================================
@@ -108,5 +123,7 @@ numtostr:
 	ret
 
 
+section .data
+	new_line db 10
 
 
