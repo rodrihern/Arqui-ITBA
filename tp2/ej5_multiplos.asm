@@ -36,7 +36,7 @@ printMultiples:
         mov eax, 4		    ; ID del Syscall WRITE
         int 80h		        ; Ejecucion de la llamada
 
-        mov ecx, new_line 	    ; Puntero a la cadena
+        mov ecx, new_line 	; Puntero a la cadena
         mov edx, 2	        ; Largo de la cadena 
         mov ebx, 1		    ; FileDescriptor (STDOUT)
         mov eax, 4		    ; ID del Syscall WRITE
