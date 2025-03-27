@@ -7,13 +7,16 @@ EXTERN printNewLine
 
 _start:
 
-    xor ecx, ecx 
+    xor ecx, ecx
 .loop:
+    add ecx, 4
     mov ebx, [esp + ecx]
+    cmp ebx, 0
+    je .loop
     call print
     call printNewLine
-    add ecx, 4
     jmp .loop
+    
 
 
     mov eax, 1		; ID del Syscall EXIT
