@@ -6,6 +6,14 @@
 
 Tambien están de R8 - R12
 
+## Stack
+
+cuando se monta un programa el stack esta de la siguiente manera
+
+![Stack](./images/stack.png)
+
+las direcciones que estan mas abajo son mayores
+
 ## Compilación y linkedición
 
 En 32 bits:
