@@ -30,6 +30,10 @@ nasm -f elf64 file.asm
 ld -m elf_x86_64 file.o
 ````
 
+## Syscalls
+
+[Linux Syscall Reference](https://syscalls.gael.in/)
+
 ## Boiler plate code
 
 ### codigo para empezar un programa
