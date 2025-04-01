@@ -1,16 +1,18 @@
 # Assembly
 
+TODAS LAS DIRECCIONES DE MEMORIA OCUPAN 1 BYTE
+
 ## Registros
 
-![Registros](./images/registros_asm.jpg)
+![Registros](../images/registros_asm.jpg)
 
 Tambien están de R8 - R12
 
 ## Stack
 
-cuando se monta un programa el stack esta de la siguiente manera
+cuando se monta un programa, el stack esta de la siguiente manera
 
-![Stack](./images/stack.png)
+![Stack](../images/stack.png)
 
 las direcciones que estan mas abajo son mayores
 
@@ -36,7 +38,7 @@ ld -m elf_x86_64 file.o
 
 ## Boiler plate code
 
-### codigo para empezar un programa
+### Codigo para empezar un programa
 ```asm
 section .text
 
@@ -54,7 +56,7 @@ section .data
 section .bss
 ```
 
-### codigo para imprimir en pantalla
+### Codigo para imprimir en pantalla
 ```asm
     mov ecx, cadena 	    ; Puntero a la cadena
 	mov edx, longitud		; Largo de la cadena 
@@ -62,3 +64,20 @@ section .bss
 	mov eax, 4		    	; ID del Syscall WRITE
 	int 80h		        	; Ejecucion de la llamada
 ```
+
+### Armado del stack frame
+```asm
+	push ebp
+	mov ebp,esp
+	...
+	mov esp,ebp
+	pop ebp
+	ret
+```
+
+## Convenciones de C
+
+* Las funciones arman siempre el stack frame
+* Los retornos de las funciones van en eax
+* En 32 bits se pushean los argumentos de las funciones de derecha a izqiuerda
+* En 64 primero llena registros y luego si no alcanza guarda en el stack

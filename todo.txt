@@ -1,0 +1,3 @@
+- revisar que utils deje todos los registros tal cual
+- chequear que los retornos de las funciones esten en eax
+- agregar lo del canary a las notas de c
