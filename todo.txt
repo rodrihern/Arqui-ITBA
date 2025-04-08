@@ -1,3 +1,0 @@
-
-- agregar lo del canary a las notas de c
-- ordenar las notas de arqui
