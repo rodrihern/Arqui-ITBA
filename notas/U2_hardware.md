@@ -1,21 +1,44 @@
-# Locura mix
+# Hardware
 
-ahora en arqui de 64 tiene 2 buses de 64
+## Buses
 
 
-puede acceder a las direcciones que le permita el bus de direcciones
+Puede acceder a las direcciones que le permita el bus de direcciones. Por ejemplo:
+* Si tiene un bus de 16 bits -> puede ver $2^{16}=64k \text{ direcciones}$
 
-por ej si tiene un bus de 16 -> puede ver 2^16 = 64kB
 
-A la cantidad de cables del bus de adress
-D la cantidad de cables del bus de datos
 
-puedo acceder a 2^A * D/8 Bytes     (en teoria)
+### Definiciones:
+* **A**: Cantidad de cables del bus de direcciones.
+* **D**: Cantidad de cables del bus de datos.
 
-Todas las direcciones de **intel** son de 1 Byte, pero en teoria no tiene por que serlo, en teoria podrian ser de D/8 
+La cantidad de memoria accesible es:
 
-Se pierde la info en las RAM y en las ROM
+```math
+2^A \times \frac{D}{8} \, \text{Bytes} \quad (\text{en teoría})
+```
 
-transferencia --> tiempo que tarda en mandar/recibir un dato el micro
+Cada cable del bus de direcciones es $A_0, A_1, ... , A_n$
 
-latencia --> tiempo que tarda en leer/escribir la memoria
+Cada cable del bus de direcciones es $D_0, D_1, ... , D_m$
+
+## Direcciones de memoria
+
+- Todas las direcciones de **Intel** son de 1 Byte.
+- En teoría, no tiene por qué ser así, podrían ser de $\frac{D}{8}$
+
+## Memoria
+
+- **RAM** y **ROM** pierden información con el tiempo.
+- **Transferencia**: Tiempo que tarda en mandar/recibir un dato el microprocesador.
+- **Latencia**: Tiempo que tarda en leer/escribir la memoria.
+
+### Comparación entre RAM y ROM
+
+| Característica       | RAM                              | ROM                              |
+|----------------------|----------------------------------|----------------------------------|
+| **Definición**       | Memoria de acceso aleatorio.    | Memoria de solo lectura.        |
+| **Volatilidad**      | Volátil (pierde datos al apagar)| No volátil (retiene datos).     |
+| **Escritura**        | Lectura y escritura.            | Solo lectura (en general).      |
+| **Velocidad**        | Más rápida.                     | Más lenta.                      |
+| **Uso típico**       | Almacenamiento temporal.        | Almacenamiento permanente.      |
