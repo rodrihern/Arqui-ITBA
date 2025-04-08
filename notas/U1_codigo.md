@@ -10,9 +10,13 @@ Tambien están de R8 - R12
 
 ## Stack
 
-cuando se monta un programa, el stack esta de la siguiente manera
+cuando se monta un programa con ld:
 
 ![Stack](../images/stack.png)
+
+con gcc:
+
+![Stack gcc](../images/stack_gcc.png)
 
 las direcciones que estan mas abajo son mayores
 
@@ -32,6 +36,16 @@ nasm -f elf64 file.asm
 ld -m elf_x86_64 file.o
 ````
 
+con gcc:
+
+el gcc siempre busca la etiqueta main para ejecutar
+````bash
+nasm -f elf32 main.asm
+gcc -c -m32 hello.c
+gcc -m32 main.o hello.o -o hello
+````
+
+
 ## Syscalls
 
 [Linux Syscall Reference](https://syscalls.gael.in/)
@@ -39,10 +53,13 @@ ld -m elf_x86_64 file.o
 ## Boiler plate code
 
 ### Codigo para empezar un programa
-```asm
-section .text
 
+si linkeditamos con ld:
+
+```asm
 GLOBAL _start
+
+section .text
 
 _start:
 
@@ -51,6 +68,25 @@ _start:
 	int 80h		    ; Ejecucion de la llamada
 
 section .data
+
+
+section .bss
+```
+
+si linkeditamos con gcc:
+```asm
+
+GLOBAL main
+
+section .text
+
+main:
+
+    mov eax, 1		; ID del Syscall EXIT
+	mov ebx, 0		; Valor de Retorno
+	int 80h		    ; Ejecucion de la llamada
+
+section .rodata
 
 
 section .bss
@@ -81,6 +117,7 @@ section .bss
 * Los retornos de las funciones van en eax
 * En 32 bits se pushean los argumentos de las funciones de derecha a izqiuerda
 * En 64 primero llena registros y luego si no alcanza guarda en el stack
+
 
 ## Canary en el Stack
 
