@@ -105,16 +105,30 @@ section .bss
 ```asm
 	push ebp
 	mov ebp,esp
+	and esp, -16	; alinea a 4 bits
 	...
 	mov esp,ebp
 	pop ebp
 	ret
 ```
 
+### Llamado a funciones de C en 32 bits
+```asm
+	;Ejemplo: fun(arg1, arg2)
+
+	push arg2
+	push arg1
+	call fun
+	add esp 4*2 	;4*(#args)
+```
+
 ## Convenciones de C
 
 * Las funciones arman siempre el stack frame
-* Los retornos de las funciones van en eax
+* Los valores de retorno en 32 bits van:
+  * en eax si entra en 32 bits
+  * en EDX:EAX si no entra en 32 pero si en 64
+  * en EDX:EAX el puntero a la estructura si no entra en 64
 * En 32 bits se pushean los argumentos de las funciones de derecha a izqiuerda
 * En 64 primero llena registros y luego si no alcanza guarda en el stack
 

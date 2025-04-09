@@ -31,7 +31,7 @@ main:
         push dword[edx+ecx]
         push argfmt
         call printf
-        add esp, 2*4
+        add esp, 4*2
         popad
 
         add ecx, 4
