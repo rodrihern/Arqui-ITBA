@@ -67,7 +67,7 @@ gcc -c file.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwi
 
 ## Syscalls
 
-[Linux Syscall Reference](https://syscalls.gael.in/)
+[Linux Syscall Reference](https://web.archive.org/web/20180806043517/http://syscalls.kernelgrok.com/)
 
 ## Boiler plate code
 
@@ -150,6 +150,12 @@ section .bss
   * en EDX:EAX el puntero a la estructura si no entra en 64
 * En 32 bits se pushean los argumentos de las funciones de derecha a izqiuerda
 * En 64 primero llena registros y luego si no alcanza guarda en el stack
+* Los registros que las funciones deben preservar son:
+  * EBX
+  * ESI
+  * EDI
+  * EBP
+  * ESP
 
 
 ## Canary en el Stack
