@@ -22,28 +22,47 @@ las direcciones que estan mas abajo son mayores
 
 ## Compilación y linkedición
 
-En 32 bits:
+### Compilación
 
+asm 32 y 64:
 ````bash
 nasm -f elf file.asm
-ld -m elf_i386 file.o
+
+nasm -f elf64 file.asm 
 ````
 
-En 64:
+c en 32:
+* -c para que solo compile y genere el .o
+* -m32 para que lo haga en 32 bits
 
 ````bash
-nasm -f elf64 file.asm 
+gcc -c -m32 file.c
+````
+
+### Linkedición
+
+ld en 32 y 64:
+
+busca la etiqueta _start para ejecutar
+````bash
+ld -m elf_i386 file.o
+
 ld -m elf_x86_64 file.o
 ````
 
-con gcc:
+
+gcc en 32:
 
 el gcc siempre busca la etiqueta main para ejecutar
 ````bash
-nasm -f elf32 main.asm
-gcc -c -m32 hello.c
-gcc -m32 main.o hello.o -o hello
+gcc -m32 file1.o file2.o
 ````
+
+### Generar salida en asm a partir de c:
+
+```bash
+gcc -c file.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel
+```
 
 
 ## Syscalls
