@@ -4,7 +4,6 @@ GLOBAL read
 GLOBAL open
 GLOBAL close
 
-
 section .text
 
 ALIGN 4
@@ -69,8 +68,8 @@ close:
     push ebp      ; fixed duplicate label 'open:'
     mov ebp, esp
     and esp, -16
-
     push ebx
+
     mov eax, 6     ; corrected missing comma
     mov ebx, [ebp+8]    ; unsigned int filedescriptor (corrected offset)
     int 80h
