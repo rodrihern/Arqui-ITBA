@@ -9,7 +9,7 @@ unsigned int write(int fd, void *buf, unsigned int count);
 int open(const char *pathname, int flags);
 int close(int fd);
 
-void print_line_number(int line_count, char * buf);
+void print_line_count(int line_count, char * buf);
 
 
 
@@ -45,7 +45,7 @@ int main() {
             // ya esta escrita la linea, ahora a escribir el numero
             // chequeamos que sea un enter y no que se termino el buffer
             if (j < bytes_read && buffer[j] == '\n') {
-                print_line_number(line_count++, line_count_buf);
+                print_line_count(line_count++, line_count_buf);
             }
             
 
@@ -53,7 +53,7 @@ int main() {
         }
     }
 
-    print_line_number(line_count, line_count_buf);
+    print_line_count(line_count, line_count_buf);
 
     // cerramos el amigo y nos vamos
     close(fd);
@@ -62,7 +62,7 @@ int main() {
     
 }
 
-void print_line_number(int line_count, char * buf) {
+void print_line_count(int line_count, char * buf) {
     int temp = line_count;
     int digits = 1;
     while ((temp /= 10) > 0) {
