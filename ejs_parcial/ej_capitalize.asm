@@ -35,7 +35,6 @@ _start:
     call numtostr
     add esp, 2*4
 
-    call printNewLine
 
     mov ecx, msg 	    ; Puntero a la cadena
 	mov edx, len		; Largo de la cadena 
@@ -65,7 +64,7 @@ capitalize:
 .loop:
     ; chequeo si esta el flag encendido
     ; me fijo si es lower
-    ; si sigue prendido el flag voy a to_uppper
+    ; si sigue prendido el flag llamo a to_uppper
     cmp edx, 0
     je .check_space
     inc eax
@@ -77,9 +76,6 @@ capitalize:
     jmp .next
 
 
-    ; si esta apagado el flag chequeo si es espacio
-    ; si es espacio avanzo hasta que no sea un espacio
-    ; prendo el flag
 .check_space:
     cmp byte[ecx], ' '
     je .space_detected

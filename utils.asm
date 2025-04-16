@@ -120,6 +120,7 @@ numtostr:
 	call print
 	POPAD
 	mov esp,ebp	 
+	call printNewLine
 	ret
 
 
