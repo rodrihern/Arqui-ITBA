@@ -131,6 +131,8 @@ section .bss
 	ret
 ```
 
+
+
 ### Llamado a funciones de C en 32 bits
 ```asm
 	;Ejemplo: fun(arg1, arg2)
@@ -140,6 +142,9 @@ section .bss
 	call fun
 	add esp 4*2 	;4*(#args)
 ```
+
+
+
 
 ## Convenciones de C
 
