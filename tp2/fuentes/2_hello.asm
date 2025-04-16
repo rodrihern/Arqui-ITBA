@@ -16,7 +16,7 @@ EXTERN print
 EXTERN exit
 
 _start:	
-	mov ebx, cadena	; Puntero a la cadena 
+	mov ebx, msg	; Puntero a la cadena 
 	call print
 	
 	mov ebx, 0
@@ -29,7 +29,7 @@ section .data
 ; vez mediante equ's. Recordar nuevamente: es mi responsabilidad entender los
 ; datos como corresponde. Assembler no conoce de tipo de datos.
 
-cadena db "Sacandole Jugo a Assembler", 10, 0
+msg db "Sacandole Jugo a Assembler", 10, 0
 
 
 section .bss
