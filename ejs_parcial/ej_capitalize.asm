@@ -5,14 +5,17 @@
 
 
 section .data
-    msg db "5ola manola bro     65jaja %locuramix", 10, 0
+    msg db "hola manola como estas", 10, 0
     len equ $-msg
 
-    
+section .bss
+    buffer resb 10
 
 section .text
     GLOBAL capitalize
     GLOBAL _start
+    EXTERN numtostr
+    EXTERN printNewLine
 
 
 _start:
@@ -27,11 +30,20 @@ _start:
     call capitalize
     add esp, 4
 
+    push buffer
+    push eax
+    call numtostr
+    add esp, 2*4
+
+    call printNewLine
+
     mov ecx, msg 	    ; Puntero a la cadena
 	mov edx, len		; Largo de la cadena 
 	mov ebx, 1		    	; FileDescriptor (STDOUT)
 	mov eax, 4		    	; ID del Syscall WRITE
 	int 80h
+
+
 
 
     mov eax, 1		; ID del Syscall EXIT
@@ -99,14 +111,11 @@ capitalize:
 
 to_upper:
     push eax
-    mov eax, [ecx]
-    add eax, 'A'-'a'
-    mov [ecx], eax
+    mov al, [ecx]
+    add al, 'A'-'a'
+    mov [ecx], al
     pop eax
     ret
-
-
-
 
 
 
