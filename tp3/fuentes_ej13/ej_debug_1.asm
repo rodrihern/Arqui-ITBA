@@ -8,6 +8,8 @@ section .rodata
 fmtA db "argc: %d",10,  0
 fmtB db "argv[%d] = %s", 10, 0
 
+;printf(fmtB, ebx, eax)
+
 section .text
 main:
     push    ebp
@@ -19,22 +21,20 @@ main:
     add     esp,2*4
 
     mov     ecx, dword[ebp+8] ; cantidad de argumentos
-    mov     ebx,0   ; argv[ebx]
-    mov     esi,[ebp+12]    ; argv  estamos pasando el arreglo
-    cld     ; autoincremento de ESI
+    mov     ebx, 0   ; argv[ebx]
+    mov     esi, [ebp+12]    ; argv  estamos pasando el arreglo
+    cld     ; apaga el flag de direcciones garantizando el correcto funcionamiento de lodsd
 .loop:
     lodsd   ; eax = [ESI] y  ESI = ESI + 4
 
 
     push    ecx  ; backup
-
     push    eax  ; *argv
-
-    push    fmtB ; formato
     push    ebx
+    push    fmtB ; formato
     call    printf
-    add     esp,4*3 ; borramos los datos usados de la pila
-
+    add     esp,4*2 ; borramos los datos usados de la pila
+    pop     eax     ; recuperamos eax 
     pop     ecx ; recuperamos el valor de ecx
 
     inc     ebx

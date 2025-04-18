@@ -8,6 +8,8 @@ TODAS LAS DIRECCIONES DE MEMORIA OCUPAN 1 BYTE
 
 Tambien están de R8 - R12
 
+
+
 ## Stack
 
 cuando se monta un programa con ld:
@@ -16,7 +18,7 @@ cuando se monta un programa con ld:
 
 con gcc:
 
-![Stack gcc](../images/stack_gcc.png)
+![Stack](../images/stack_gcc.png)
 
 las direcciones que estan mas abajo son mayores
 
@@ -26,7 +28,7 @@ las direcciones que estan mas abajo son mayores
 
 asm 32 y 64:
 ````bash
-nasm -f elf file.asm
+nasm -f elf32 file.asm
 
 nasm -f elf64 file.asm 
 ````
@@ -196,3 +198,23 @@ El **canary** es un valor especial que se coloca en el stack entre las variables
 - No protege contra todos los tipos de vulnerabilidades de memoria.
 - Puede ser evitado si el atacante conoce el valor del canary.
 
+
+## Tamaño de Tipos de Datos
+
+| Tipo de Dato        | Tamaño (32-bit) | Tamaño (64-bit) | Notas                                     |
+| :------------------ | :-------------- | :-------------- | :---------------------------------------- |
+| **INTEGER**         |                 |                 |                                           |
+| `char`              | 1 byte          | 1 byte          |                                           |
+| `short`             | 2 bytes         | 2 bytes         |                                           |
+| `int`               | 4 bytes         | 4 bytes         |                                           |
+| `long`              | 4 bytes         | 8 bytes         | Varía según el modelo de datos (LP64)     |
+| `long long`         | 8 bytes         | 8 bytes         |                                           |
+| `Pointer`           | 4 bytes         | 8 bytes         |                                           |
+| **SSE**             |                 |                 |                                           |
+| `float`             | 4 bytes         | 4 bytes         | Generalmente manejado por FPU/SSE         |
+| `double`            | 8 bytes         | 8 bytes         | Generalmente manejado por FPU/SSE         |
+| **MEMORY**          |                 |                 |                                           |
+| Datos > 8 bytes     | En memoria      | En memoria      | Estructuras, arrays grandes, etc.         |
+| Datos desalineados  | En memoria      | En memoria      | Puede requerir múltiples accesos a memoria |
+
+**Nota:** Los tamaños pueden variar ligeramente dependiendo del compilador específico y el modelo de datos utilizado (e.g., ILP32, LP64). La tabla muestra los tamaños más comunes para arquitecturas x86/x86-64 con GCC/Clang en Linux.
