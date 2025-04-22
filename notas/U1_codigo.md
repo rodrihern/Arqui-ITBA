@@ -218,3 +218,7 @@ El **canary** es un valor especial que se coloca en el stack entre las variables
 | Datos desalineados  | En memoria      | En memoria      | Puede requerir múltiples accesos a memoria |
 
 **Nota:** Los tamaños pueden variar ligeramente dependiendo del compilador específico y el modelo de datos utilizado (e.g., ILP32, LP64). La tabla muestra los tamaños más comunes para arquitecturas x86/x86-64 con GCC/Clang en Linux.
+
+## Preguntas practica
+
+en asm definiciones de variables y constantes

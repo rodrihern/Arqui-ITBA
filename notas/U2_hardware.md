@@ -42,3 +42,8 @@ Cada cable del bus de direcciones es $D_0, D_1, ... , D_m$
 | **Escritura**        | Lectura y escritura.            | Solo lectura (en general).      |
 | **Velocidad**        | Más rápida.                     | Más lenta.                      |
 | **Uso típico**       | Almacenamiento temporal.        | Almacenamiento permanente.      |
+
+
+NO lleva corchete la instruccion IN y OUT
+
+IN y OUT son las unicas dos instrucciones de IO/M
