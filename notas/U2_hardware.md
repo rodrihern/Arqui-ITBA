@@ -47,3 +47,21 @@ Cada cable del bus de direcciones es $D_0, D_1, ... , D_m$
 NO lleva corchete la instruccion IN y OUT
 
 IN y OUT son las unicas dos instrucciones de IO/M
+
+## Interrupciones
+
+La rompen toda
+
+el teclado esta en 60h
+
+el pic esta en la 20h y 21h
+
+en la 21h esta el imr que es la mascara de interrupciones, para que bootee tiene que estar todo en 1 pues se activa en 0 las interrupciones.
+
+El teclado esta en IRQ1, la mascara tiene IRQ7 en el BMS y IRQ0 en el menos significativo
+
+para avisar que termine (EOI) hay que mandar 20h al 20h
+
+## Preguntas 
+
+como hace discord para poder mutearte si estas en focus en otra app

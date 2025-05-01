@@ -13,7 +13,6 @@ void print_line_count(int line_count, char * buf);
 
 
 
-
 int main() {
     char buffer[BUFFER_SIZE];
     int fd;
