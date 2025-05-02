@@ -12,23 +12,71 @@ EXTERN printf
 EXTERN get_humedad
 
 RES equ 16
-FILENAME equ '/sys/bus/iio/in_voltage0_raw'
 SYSCALL_NANOSLEEP equ 162
-fmt equ ""
 
 section .data
-arreglo dd 10,20, 30, 40, 50
+time_spec dd 1, 0
+msg_belongs db "pertenece", 10, 0
+msg_not_belongs db "no pertenece", 10, 0
+filename db "/sys/bus/iio/in_voltage0_raw"
+arreglo dd 10, 20, 30, 40, 50
 cant_arreglo dd ($-arreglo)/4
 
 section .text
 
 main:
+.read:
+    push filename
+    push 16
+    call get_humedad
+    add esp, 2*4
+    mov ebx, eax ;guardo en ebx para llamar a belongs
+    call belongs
+    cmp eax, 1
+    je .print_belongs
+    push msg_not_belongs
+    jmp .print
+.print_belongs:
+    push msg_belongs
+.print:
+    call printf
+    add esp, 4
+    call sleep
+    jmp .read 
+    
 
-.loop:
 
-    mov eax, 1
-    mov ebx, 0
+sleep:
+    pushad
+    mov eax, SYSCALL_NANOSLEEP
+    mov ebx, time_spec
     int 80h
+    popad
+    ret
+
+; se fija si el elemento en ebx esta en el arreglo
+belongs:
+    push ebp
+    mov ebp, esp
+    xor ecx, ecx ;i
+.loop:
+    cmp ebx, [arreglo + ecx*4]
+    je .true
+    inc ecx
+    cmp ecx, [cant_arreglo]
+    jl .loop
 
 
+    mov eax, 0
+    leave
+    ret
 
+.true:
+    mov eax, 1
+    leave
+    ret
+
+; solo para probar
+get_humedad:
+    mov eax, 20
+    ret
