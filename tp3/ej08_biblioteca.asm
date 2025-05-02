@@ -17,7 +17,7 @@ exit:
 read:
     push ebp
     mov ebp, esp
-    and esp, -16    ; corrected 'ans' to 'and'
+    and esp, -16    
 
     push ebx    ; preservar ebx
     mov eax, 3

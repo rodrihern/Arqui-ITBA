@@ -10,7 +10,7 @@ section .text
 
 main:
     push ebp            ;Armado de stack frame
-    mov ebp, esp        ;
+    mov ebp, esp
     
     
 

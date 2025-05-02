@@ -17,6 +17,7 @@ cuando se monta un programa con ld:
 ![Stack](../images/stack.png)
 
 con gcc:
+(despues de el armado del stack frame)
 
 ![Stack](../images/stack_gcc.png)
 

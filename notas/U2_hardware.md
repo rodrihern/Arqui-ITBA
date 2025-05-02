@@ -18,6 +18,8 @@ La cantidad de memoria accesible es:
 2^A \times \frac{D}{8} \, \text{Bytes} \quad (\text{en teoría})
 ```
 
+Esto se llama _**Mapa de memoria**_
+
 Cada cable del bus de direcciones es $A_0, A_1, ... , A_n$
 
 Cada cable del bus de direcciones es $D_0, D_1, ... , D_m$
@@ -43,6 +45,7 @@ Cada cable del bus de direcciones es $D_0, D_1, ... , D_m$
 | **Velocidad**        | Más rápida.                     | Más lenta.                      |
 | **Uso típico**       | Almacenamiento temporal.        | Almacenamiento permanente.      |
 
+<<<<<<< HEAD
 
 NO lleva corchete la instruccion IN y OUT
 
@@ -65,3 +68,19 @@ para avisar que termine (EOI) hay que mandar 20h al 20h
 ## Preguntas 
 
 como hace discord para poder mutearte si estas en focus en otra app
+=======
+## Notas nuevas a ordenar
+
+$$
+Dir_{max} - Dir_{min} = Memo-1
+$$
+Donde Memo-1 sería la dirección máxima si empezara en 0x0000,
+
+Si tengo una memoria de $2^n$ serian n bits en 1. 
+
+## Preguntas
+
+* No puede ser que mande una $A_i$ tanto al decodificador como a una memoria/periferico ?
+
+* Hace falta los puentecitos en los dibujos o con no hacerle puntito gordo alcanza ?
+>>>>>>> a47609c (Update documentation and code formatting; add memory map note in U2_hardware.md, clarify stack frame in U1_codigo.md, and improve comments in assembly files.)
