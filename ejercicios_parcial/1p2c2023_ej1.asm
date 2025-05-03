@@ -16,8 +16,8 @@ SYSCALL_NANOSLEEP equ 162
 
 section .data
 time_spec dd 1, 0
-msg_belongs db "pertenece", 10, 0
-msg_not_belongs db "no pertenece", 10, 0
+msg_belongs db "coincide", 10, 0
+msg_not_belongs db "no coincide", 10, 0
 filename db "/sys/bus/iio/in_voltage0_raw"
 arreglo dd 10, 20, 30, 40, 50
 cant_arreglo dd ($-arreglo)/4
@@ -30,6 +30,9 @@ main:
     push 16
     call get_humedad
     add esp, 2*4
+    mov ecx, 7  ; cargamos el numero para dividir
+    xor edx, edx ; limpiamos edx
+    div ecx     ; dejamos en eax, eax/7
     mov ebx, eax ;guardo en ebx para llamar a belongs
     call belongs
     cmp eax, 1
@@ -66,17 +69,16 @@ belongs:
     cmp ecx, [cant_arreglo]
     jl .loop
 
-
     mov eax, 0
     leave
     ret
-
 .true:
     mov eax, 1
     leave
     ret
 
+
 ; solo para probar
 get_humedad:
-    mov eax, 20
+    mov eax, 140
     ret
