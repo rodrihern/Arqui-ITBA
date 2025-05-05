@@ -7,9 +7,9 @@ main:
     mov ebp, esp
     and esp, -16          ; Alinear el stack a 16 bytes
     sub esp, 32           ; Reservar espacio en el stack
-    mov DWORD PTR [esp+19], 1819043176 ; "hola" en ASCII (little-endian)
-    mov DWORD PTR [esp+23], 1870078063 ; "mundo" en ASCII (little-endian)
-    mov DWORD PTR [esp+27], 174353522  ; "!" en ASCII (little-endian)
+    mov DWORD PTR [esp+19], 1819043176 ; "hell" en ASCII (little-endian)
+    mov DWORD PTR [esp+23], 1870078063 ; "o wo" en ASCII (little-endian)
+    mov DWORD PTR [esp+27], 174353522  ; "rld!" en ASCII (little-endian)
     mov BYTE PTR [esp+31], 0           ; Terminador nulo
     lea eax, [esp+19]      ; Cargar la dirección de la cadena
     mov DWORD PTR [esp], eax

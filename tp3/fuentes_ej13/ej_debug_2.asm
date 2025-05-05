@@ -6,11 +6,11 @@ EXTERN puts, sprintf
 
 section .rodata
 fmt db "%d", 0
-number dd 1234567890
+word dd 1234567890
 
 section .text
 main:
-     push dword [number]
+     push dword [word]
      push fmt
      push buffer
      call sprintf
