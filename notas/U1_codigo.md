@@ -157,7 +157,13 @@ section .bss
   * en EDX:EAX si no entra en 32 pero si en 64
   * en EDX:EAX el puntero a la estructura si no entra en 64
 * En 32 bits se pushean los argumentos de las funciones de derecha a izqiuerda
-* En 64 primero llena registros y luego si no alcanza guarda en el stack
+* En 64 primero llena registros y luego si no alcanza guarda en el stack en el siguiente orden:
+	1. RDI
+	2. RSI
+	3. RDX
+	4. RCX
+	5. R8
+	6. R9
 * Los registros que las funciones deben preservar son:
   * EBX
   * ESI

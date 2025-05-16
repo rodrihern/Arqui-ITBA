@@ -10,6 +10,11 @@ static const uint32_t height = 25 ;
 static uint8_t * limit = (uint8_t*)0xB8FA0; // video + width * height * 2 - 1
 
 
+static void checkCurrentVideo() {
+	if (currentVideo >= limit || currentVideo < video) {
+		currentVideo = video;
+	}
+}
 
 void ncPrint(const char * string)
 {
@@ -26,9 +31,27 @@ void ncPrintStyle(const char * msg, const char style) {
 		currentVideo += 2;
 	}
 
-	if (currentVideo >= limit) {
-		currentVideo = video;
+	checkCurrentVideo();
+}
+
+void ncPrintInPosition(uint8_t i, uint8_t j, char * string, const uint8_t style) {
+	if (i < 0 || i >= height || j < 0 || j >= width) {
+		return;
 	}
+	uint8_t * backup = currentVideo;
+	currentVideo = video + (i * width + j) * 2;
+	ncPrintStyle(string, style);
+	currentVideo = backup;
+}
+
+void ncPrintInPositionNumber(uint8_t i, uint8_t j, uint64_t number) {
+	if (i >= height || j >= width) {
+		return;
+	}
+	uint8_t * backup = currentVideo;
+	currentVideo = video + (i * width + j) * 2;
+	ncPrintDec(number);
+	currentVideo = backup;
 }
 
 void ncPrintChar(char character)
@@ -47,9 +70,9 @@ void ncPrintChar(char character)
 		currentVideo += 2;
 		break;
 	}
-	if (currentVideo >= limit || currentVideo < video) {
-		currentVideo = video;
-	}
+
+	checkCurrentVideo();
+
 }
 
 void ncNewline()
@@ -59,7 +82,16 @@ void ncNewline()
 		ncPrintChar(' ');
 	}
 	while((uint64_t)(currentVideo - video) % (width * 2) != 0);
+	checkCurrentVideo();
 }
+
+void ncSetCursor(uint8_t i, uint8_t j) {
+	if (i >= height || j >= width) {
+		return;
+	}
+	currentVideo = video + (i * width + j) * 2;
+}
+
 
 void ncPrintDec(uint64_t value)
 {
@@ -121,5 +153,8 @@ static uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)
 		p2--;
 	}
 
+
+
 	return digits;
 }
+
