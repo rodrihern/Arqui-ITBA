@@ -82,23 +82,8 @@ void * initializeKernelBinary()
 
 int main()
 {	
-	ncPrint("[Kernel Main]");
+	ncClear();
 	ncNewline();
-	ncPrint("  Sample code module at 0x");
-	ncPrintHex((uint64_t)sampleCodeModuleAddress);
-	ncNewline();
-	ncPrint("  Calling the sample code module returned: ");
-	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());
-	ncNewline();
-	ncNewline();
-
-	ncPrint("  Sample data module at 0x");
-	ncPrintHex((uint64_t)sampleDataModuleAddress);
-	ncNewline();
-	ncPrint("  Sample data module contents: ");
-	ncPrint((char*)sampleDataModuleAddress);
-	ncNewline();
-
-	ncPrint("[Finished]");
+	ncPrintMsg("Arquitectura de computadoras", 0x30);
 	return 0;
 }
