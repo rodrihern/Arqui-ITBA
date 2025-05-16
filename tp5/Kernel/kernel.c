@@ -84,6 +84,17 @@ int main()
 {	
 	ncClear();
 	ncNewline();
-	ncPrintMsg("Arquitectura de computadoras", 0x30);
+	ncPrintString("Arquitectura de computadoras", 0x30);
+	ncNewline();
+	
+	uint8_t time_buffer[3];
+	getTime(time_buffer);
+	ncPrintHex(time_buffer[0]);
+	ncPrint(":");
+	ncPrintHex(time_buffer[1]);
+	ncPrint(":");
+	ncPrintHex(time_buffer[0]);
+	ncNewline();
+
 	return 0;
 }

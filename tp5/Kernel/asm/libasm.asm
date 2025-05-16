@@ -1,4 +1,5 @@
 GLOBAL cpuVendor
+GLOBAL getTime
 
 section .text
 	
@@ -24,4 +25,59 @@ cpuVendor:
 
 	mov rsp, rbp
 	pop rbp
+	ret
+
+getTime:
+	; recibe en rdi el puntero al buffer de respuesta
+	push rbp
+	mov rbp, rsp 
+
+	call getHour
+	mov [rdi], al
+
+	call getMinutes
+	mov [rdi+1], al
+
+	call getSeconds
+	mov [rdi+2], al 
+
+	leave
+	ret
+
+
+
+getSeconds:
+	mov al, 0
+	out 0x70, al
+	in al, 0x71
+	ret
+
+getMinutes:
+	mov al, 2
+	out 0x70, al
+	in al, 0x71
+	ret
+
+getHour:
+	mov al, 4
+	out 0x70, al
+	in al, 0x71
+	ret
+
+getDayOfWeek:
+	mov al, 6
+	out 0x70, al
+	in al, 0x71
+	ret
+
+getMonth:
+	mov al, 8
+	out 0x70, al
+	in al, 0x71
+	ret
+
+getYear:
+	mov al, 9
+	out 0x70, al
+	in al, 0x71
 	ret

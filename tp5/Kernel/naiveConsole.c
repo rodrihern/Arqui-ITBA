@@ -7,7 +7,7 @@ static uint8_t * const video = (uint8_t*)0xB8000;
 static uint8_t * currentVideo = (uint8_t*)0xB8000;
 static const uint32_t width = 80;
 static const uint32_t height = 25 ;
-static uint8_t * limit = (uint8_t*)0xB8FA0; 
+static uint8_t * limit = (uint8_t*)0xB8FA0; // video + width * height * 2
 
 
 
@@ -19,7 +19,7 @@ void ncPrint(const char * string)
 		ncPrintChar(string[i]);
 }
 
-void ncPrintMsg(const char * msg, const char style) {
+void ncPrintString(const char * msg, const char style) {
 	for (int i = 0; msg[i] != 0 && currentVideo < limit; i++) {
 		currentVideo[0] = msg[i];
 		currentVideo[1] = style;
