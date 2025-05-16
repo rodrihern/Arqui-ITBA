@@ -1,5 +1,6 @@
 GLOBAL cpuVendor
 GLOBAL getTime
+GLOBAL getPressedKey
 
 section .text
 	
@@ -81,3 +82,15 @@ getYear:
 	out 0x70, al
 	in al, 0x71
 	ret
+
+getPressedKey:
+	xor rax, rax 
+.loop:
+	in al, 64h
+	and al, 0x01
+	jz .loop ; si no tiene tecla se queda esperando
+	; ahora tiene tecla
+	in al, 60h
+	ret
+
+

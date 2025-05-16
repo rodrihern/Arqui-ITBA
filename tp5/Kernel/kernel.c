@@ -3,6 +3,7 @@
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
+#include "keyboard.h"
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -84,7 +85,7 @@ int main()
 {	
 	ncClear();
 	ncNewline();
-	ncPrintString("Arquitectura de computadoras", 0x30);
+	ncPrintStyle("Arquitectura de computadoras", 0x30);
 	ncNewline();
 	
 	uint8_t time_buffer[3];
@@ -95,6 +96,10 @@ int main()
 	ncPrint(":");
 	ncPrintHex(time_buffer[0]);
 	ncNewline();
+
+	ncPrint("[TEXT]: ");
+	printPressedKey();
+
 
 	return 0;
 }
