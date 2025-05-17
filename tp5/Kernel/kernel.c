@@ -5,6 +5,7 @@
 #include <naiveConsole.h>
 #include "keyboard.h"
 #include "idtLoader.h"
+#include "time.h"
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -85,9 +86,28 @@ void * initializeKernelBinary()
 	return getStackBase();
 }
 
+
+
 int main()
 {	
+	// ncPrint("[Kernel Main]");
+	// ncNewline();
+	// ncPrint("  Sample code module at 0x");
+	// ncPrintHex((uint64_t)sampleCodeModuleAddress);
+	// ncNewline();
+	// ncPrint("  Calling the sample code module returned: ");
+	// ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());
+	// ncNewline();
+	// ncNewline();
 
+	// ncPrint("  Sample data module at 0x");
+	// ncPrintHex((uint64_t)sampleDataModuleAddress);
+	// ncNewline();
+	// ncPrint("  Sample data module contents: ");
+	// ncPrint((char*)sampleDataModuleAddress);
+	// ncNewline();
+
+	sleep(2);
 	ncClear();
 	ncNewline();
 	ncPrintStyle("Arquitectura de computadoras", 0x30);
