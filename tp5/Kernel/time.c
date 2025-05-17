@@ -4,8 +4,11 @@
 static unsigned long ticks = 0;
 
 void timer_handler() {
-	ncPrintInPosition(0, 0, "Ticks:", 0x50);
-	ncPrintInPositionNumber(0, 7, ticks);
+	int elapsed = seconds_elapsed();
+	if (elapsed % 5 == 0) {
+		ncPrintInPosition(0, 0, "Seconds:", 0x50);
+		ncPrintInPositionNumber(0, 9, elapsed);
+	}
 	ticks++;
 }
 

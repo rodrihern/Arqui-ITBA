@@ -107,7 +107,7 @@ int main()
 	// ncPrint((char*)sampleDataModuleAddress);
 	// ncNewline();
 
-	sleep(2);
+	// sleep(2);
 	ncClear();
 	ncNewline();
 	ncPrintStyle("Arquitectura de computadoras", 0x30);
@@ -123,7 +123,9 @@ int main()
 	ncNewline();
 
 	ncPrint("[TEXT]: ");
-	printPressedKey();
+	// pollForPressedKey();
+	while (1); // para que no se quede colgada
+	
 
 
 	return 0;

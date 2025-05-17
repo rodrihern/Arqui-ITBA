@@ -11,11 +11,15 @@ char scancode_to_ascii[128] = {
     // ... (resto omitido)
 };
 
-void printPressedKey() {
+void pollForPressedKey() {
     while (1) {
-        uint8_t scancode = getPressedKey();
-        if (scancode < 128) {
-            ncPrintChar(scancode_to_ascii[scancode]);
-        }   
+        handlePressedKey();
+    }
+}
+
+void handlePressedKey() {
+    uint8_t scancode = getPressedKey();
+    if (scancode < 128) {
+        ncPrintChar(scancode_to_ascii[scancode]);
     }
 }

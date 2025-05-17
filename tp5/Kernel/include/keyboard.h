@@ -1,7 +1,8 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
-void printPressedKey();
+void pollForPressedKey();
+void handlePressedKey();
 
 #endif
 
