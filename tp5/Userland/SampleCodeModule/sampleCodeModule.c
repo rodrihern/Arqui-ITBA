@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
+extern void userProgram(void);
+
 char * v = (char*)0xB8000 + 79 * 2;
 
 static int var1 = 0;
@@ -12,6 +14,8 @@ int main() {
 	// All the following code may be removed 
 	*v = 'X';
 	*(v+1) = 0x74;
+
+	userProgram();
 
 	//Test if BSS is properly set up
 	if (var1 == 0 && var2 == 0)

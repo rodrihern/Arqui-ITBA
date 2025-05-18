@@ -2,6 +2,8 @@
     "files.associations": {
         "naiveconsole.h": "c",
         "lib.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "interrupts.h": "c",
+        "idtloader.h": "c"
     }
 }

@@ -24,9 +24,19 @@ void ncPrint(const char * string)
 		ncPrintChar(string[i]);
 }
 
-void ncPrintStyle(const char * msg, const char style) {
+void ncPrintStyle(const char * msg, uint8_t style) {
 	for (int i = 0; msg[i] != 0 && currentVideo < limit; i++) {
 		currentVideo[0] = msg[i];
+		currentVideo[1] = style;
+		currentVideo += 2;
+	}
+
+	checkCurrentVideo();
+}
+
+void ncPrintStyleCount(const char * buf, uint8_t style, uint64_t count) {
+	for (int i = 0; i < count && currentVideo < limit; i++) {
+		currentVideo[0] = buf[i];
 		currentVideo[1] = style;
 		currentVideo += 2;
 	}
