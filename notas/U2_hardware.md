@@ -62,5 +62,3 @@ Cada cable del bus de datos es $D_0, D_1, ... , D_m$
 ## Preguntas
 
 - ¿Cómo hace Discord para poder mutearte si estás en focus en otra app?
-- ¿No puede ser que mande una $A_i$ tanto al decodificador como a una memoria/periférico?
-- ¿Hace falta los puentecitos en los dibujos o con no hacerle puntito gordo alcanza?

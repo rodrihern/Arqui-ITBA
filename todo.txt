@@ -1,6 +1,11 @@
-- ver video para hacer la guia
-- matar la guia 
-- ver todo lo de nash a ver que onda
-- mandarle cumbia al tp
+Preguntas:
+- en donde va la shell y la app, tengo que poder hacer multi tasking?
+- si tienen que correr los dos al mismo tiempo que onda
+- lo de la snapshot como hacerlo piola
+- que me orienten un poco
+- puedo manejar mas de una tecla presionada a la vez
+
+
+
 
 
