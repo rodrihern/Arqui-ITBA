@@ -4,6 +4,9 @@
         "lib.h": "c",
         "stdint.h": "c",
         "interrupts.h": "c",
-        "idtloader.h": "c"
+        "idtloader.h": "c",
+        "stdarg.h": "c",
+        "__stdarg_header_macro.h": "c",
+        "__stdarg___gnuc_va_list.h": "c"
     }
 }

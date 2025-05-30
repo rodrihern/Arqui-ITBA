@@ -91,51 +91,44 @@ void * initializeKernelBinary()
 
 
 int main() {	
-	// ncPrint("[Kernel Main]");
-	// ncNewline();
-	// ncPrint("  Sample code module at 0x");
-	// ncPrintHex((uint64_t)sampleCodeModuleAddress);
-	// ncNewline();
-	// ncPrint("  Calling the sample code module returned: ");
-	// ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());
-	// ncNewline();
-	// ncNewline();
+	ncPrint("[Kernel Main]");
+	ncNewline();
+	ncPrint("  Sample code module at 0x");
+	ncPrintHex((uint64_t)sampleCodeModuleAddress);
+	ncNewline();
+	ncPrint("  Calling the sample code module returned: ");
+	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());
+	ncNewline();
+	ncNewline();
 
-	// ncPrint("  Sample data module at 0x");
-	// ncPrintHex((uint64_t)sampleDataModuleAddress);
-	// ncNewline();
-	// ncPrint("  Sample data module contents: ");
-	// ncPrint((char*)sampleDataModuleAddress);
-	// ncNewline();
+	ncPrint("  Sample data module at 0x");
+	ncPrintHex((uint64_t)sampleDataModuleAddress);
+	ncNewline();
+	ncPrint("  Sample data module contents: ");
+	ncPrint((char*)sampleDataModuleAddress);
+	ncNewline();
 
-	// ncPrint("[Finished]");
+	ncPrint("[Finished]");
 
-	// sleep(5);
-	// ncClear();
-	// ncNewline();
-	// ncPrintStyle("Arquitectura de computadoras", 0x30);
-	// ncNewline();
+	sleep(5);
+	ncClear();
+	ncNewline();
+	ncPrintStyle("Arquitectura de computadoras", 0x30);
+	ncNewline();
 	
-	// uint8_t time_buffer[3];
-	// getTime(time_buffer);
-	// ncPrintHex(time_buffer[0]);
-	// ncPrint(":");
-	// ncPrintHex(time_buffer[1]);
-	// ncPrint(":");
-	// ncPrintHex(time_buffer[0]);
-	// ncNewline();
-	// ncPrint("[TEXT]: ");
+	uint8_t time_buffer[3];
+	getTime(time_buffer);
+	ncPrintHex(time_buffer[0]);
+	ncPrint(":");
+	ncPrintHex(time_buffer[1]);
+	ncPrint(":");
+	ncPrintHex(time_buffer[2]);
+	ncNewline();
+	ncPrint("[TEXT]: ");
 	// // pollForPressedKey();
-	// while (1); // para que no se quede colgada
+	 while (1); // para que no se quede colgada
 	
-	DrawSquare();
-
-
-
-	// uint8_t screen_height = getHeight();
-	// for (int i = 0; i < screen_height; i++) {
-	// 	putPixel(0x30, 10, i);
-	// }
+	
 	
 
 

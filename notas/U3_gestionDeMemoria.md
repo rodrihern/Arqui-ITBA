@@ -13,6 +13,8 @@ las instrucciones de in y out junto con cli y sti, solo la pueden usar las aplic
 
 ## Segmentacion
 
+TODO: completar
+
 ## Paginacion
 
 Divide al maña de memoria y a la memoria fisica en paginas de un tamaño fijo
@@ -23,7 +25,7 @@ Tiene esquema de permisos
 
 Ventaja: si hay muchos programas que quieren lo mismo puedo cargar eso en memoria una sola vez en una pagina fisica y que cada proceso tiene una pagina virtual que apunta a esa misma pagina fisica
 
-## De que tamaño tiene que ser 
+### De que tamaño tiene que ser 
 
 si achico mucho la pagina, se agranda mucho el indice, osea que pagina le diste a cada proceso
 
@@ -49,3 +51,26 @@ por cada aplicacion tengo un directorio y sus tablas de pagina
 
 el registro cr3 apunta al directorio
 
+TODO: pedirle a azu / mariu la foto del pizarron
+
+### Paging y swapping
+
+...
+
+## Memoria Cache
+
+Esta adentro del procesador, no hay que salir a buscar nada con el Bus de direcciones
+
+reducido (solo 15M mas o menos) pero full rapido
+
+acelera como se ejecutan los ciclos (si hay algo que tiene que hacer muchas veces lo deja aca en la cache para no tener que ir a buscarlo todo el tiempo a la ram)
+
+va en medio de todas las peticiones del procesador a la memoria, todo pasa por la cache
+
+
+
+
+## Preguntas 
+
+* que implica que tenga varios nucleos un procesador
+* 
