@@ -19,7 +19,9 @@ void pollForPressedKey() {
 
 void handlePressedKey() {
     uint8_t scancode = getPressedKey();
-    if (scancode < 128) {
-        ncPrintChar(scancode_to_ascii[scancode]);
+    if (scancode > 0x80) {
+        ncPrintChar('B');
+    } else if (scancode < 0x80) {
+        ncPrintChar('A');
     }
 }

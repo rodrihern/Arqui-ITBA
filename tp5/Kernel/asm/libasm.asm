@@ -1,6 +1,7 @@
 GLOBAL cpuVendor
 GLOBAL getTime
 GLOBAL getPressedKey
+GLOBAL setTimerFreq 
 
 section .text
 	
@@ -27,6 +28,23 @@ cpuVendor:
 	mov rsp, rbp
 	pop rbp
 	ret
+
+setTimerFreq:
+    push rbp
+    mov rbp, rsp
+    
+    ; Configurar el modo del timer (canal 0, modo 3 - square wave)
+    mov al, 0x36    ; 00110110b - canal 0, lobyte/hibyte, modo 3
+    out 0x43, al    ; puerto de comando del timer
+    
+    ; Enviar el divisor (lobyte primero, luego hibyte)
+    mov ax, di      ; divisor en ax
+    out 0x40, al    ; enviar lobyte al canal 0
+    mov al, ah
+    out 0x40, al    ; enviar hibyte al canal 0
+    
+    pop rbp
+    ret
 
 getTime:
 	; recibe en rdi el puntero al buffer de respuesta

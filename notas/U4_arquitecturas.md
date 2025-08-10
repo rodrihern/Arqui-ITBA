@@ -1,88 +1,80 @@
 # Arquitecturas
 
+## Modelos de Arquitectura
+
+### Von Neumann
+- Un solo bus para instrucciones y datos.
+- Simplicidad, pero puede haber cuellos de botella ("Von Neumann bottleneck").
+
+### Harvard
+- Buses separados para instrucciones y datos.
+- Permite acceso simultáneo, mejora el rendimiento.
+- Usado en microcontroladores y procesadores modernos (ej: ARM Cortex A9).
+
 ## Procesadores ARM
 
-La empresa ARM hace el diseño, pero no los fabrica
-
-gana plata por la propiedad intelectual
-
-tiene muy buena relacion (instrucciones por segundo / watt)
-
-crean software que simula el procesador, usan lenguajes para simular hardware como VERILOG
-
-onda apple le compra el diseño a arm y se lo manda a fabricar a los chinos
-
-los procesadores de los celulares son arm
-
-a diferencia de intel vos le pedis un procesador exclusivo para lo que vos queres
-(los hace a medida)
-
-intel los hace para computadoras nomas
-
-tambien mechan la tecnologia SoC (system on a chip)
-
-te viene procesador, memorias, osciladores, conversonres, interfaces, todo en el mismo chip
-
-no hay que armar en frankenstein de comprar mother, ram y toda la bola
-
-desventaja, al estar todo junto no se puede actualizar la ram, cambiar la placa de video, etc. Tengo que cambiar el chip
-
-El procesador puede ponerse en modo ahorro de energia
-
-Las versionees de arm no son retrocompatibles, la teca es esa, rompen compatibilidad hacia atras
-obsolecencia programada bro
-
-Casi todas las instrucciones tardan lo mismo (1 ciclo de procesador)
-
-Se usa para programacion temporal, para poder saber cuanto va a tardar los programas
-
-Hace que las instrucciones mas rapidas tarden un poco mas
-
-No tiene mapa de entrada y salida, tiene un mapa de 4G
+- ARM diseña procesadores, no los fabrica. Vende propiedad intelectual (IP).
+- Muy buena relación instrucciones por segundo / watt (eficiencia energética).
+- Usados en celulares, tablets, IoT, embebidos.
+- SoC (System on a Chip): integra CPU, memorias, interfaces, etc. en un solo chip.
+- Desventaja: no se puede actualizar componentes individuales (ej: RAM, GPU).
+- No son retrocompatibles entre versiones (obsolescencia programada).
+- Casi todas las instrucciones tardan lo mismo (RISC, 1 ciclo por instrucción), útil para sistemas de tiempo real.
+- No tiene mapa de entrada/salida tradicional, usa direccionamiento de memoria (MMIO).
 
 ### ARM Cortex A9
+- Arquitectura Harvard para caché (separada para instrucciones y datos).
 
-Tiene arquitectura harvard para las memorias cache (una de instrucciones y una de datos)
+## Procesadores x86
+- Arquitectura CISC (instrucciones complejas, diferentes duraciones).
+- Usados en PCs, servidores.
+- Retrocompatibilidad histórica.
+- Soporta segmentación, paginación, modos de protección.
 
 ## Pipeline
 
-Todos los procesadores tienen pipeline
+El **pipeline** permite ejecutar varias instrucciones en paralelo, dividiendo la ejecución en etapas:
 
-Pipeline de 3 niveles:
+- **Fetch**: Buscar la instrucción en memoria.
+- **Decode**: Decodificar la instrucción.
+- **Execute**: Ejecutar la instrucción.
 
-fetch -> decode -> execute
-
-Se pueden paralelizar y hacer 
-
+Ejemplo de pipeline de 3 etapas:
+```
 fetch -> decode -> execute
         fetch -> decode -> execute
                 fetch -> decode -> execute
+```
 
-### Fetch
+**Ventajas:**
+- Aumenta el rendimiento (más instrucciones por ciclo).
 
-Busco la instruccion a la ram
+**Problemas:**
+- Si una instrucción necesita acceder a memoria, puede bloquear el fetch.
+- Los saltos (jumps) pueden vaciar el pipeline (pipeline flush), perdiendo eficiencia.
 
-### Decode
+## Instrucciones condicionales (ARM)
+- Instrucciones como `ADDEQ`, `SUBNE` permiten ejecutar solo si se cumple una condición (los primeros 4 bits indican la condición).
+- Si la condición no se cumple, la instrucción se descarta rápidamente (eficiencia).
 
-La decodifico a ver que corno me traje, a ver si es una instruccion
+## Multinúcleo (Multicore)
+- Varios núcleos en un solo chip permiten ejecutar múltiples hilos/procesos en paralelo.
+- Cada núcleo puede tener su propia caché L1 y compartir L2/L3.
+- Mejora el rendimiento en aplicaciones paralelizables y sistemas multitarea.
 
-### Execute
+## Comparación ARM vs x86
+| Característica         | ARM (RISC)         | x86 (CISC)         |
+|-----------------------|--------------------|--------------------|
+| Instrucciones         | Simples, fijas     | Complejas, variables|
+| Consumo energético    | Bajo               | Alto               |
+| Usos                  | Móviles, embebidos | PCs, servidores    |
+| Retrocompatibilidad   | Baja               | Muy alta           |
+| Pipeline              | Profundo, regular  | Variable           |
 
-ejecuto la instruccion
-
-
-### Problema
-
-A veces no es tan perfectito porque por ahi para ejecutar una instruccion tengo que ir a memoria entonces no puedo en ese momento hacer un fetch porque tengo el bus de address usado 
-
-Tiene un enemigo que es el jump, porque al final me traje una instruccion que despues la salte.
-
-Un jump provoca que se vacie el pipeline
-
-### Instrucciones condicionales
-
-Hicieron instrucciones como Addeq o Subne (compiar codigo)
-
-en los primeros 4 bits traen la condicion, si la condicion no se cumple no sigue decodificando 
-
-### Extensiones de ARM
+## Resumen
+- **Von Neumann**: un bus para todo, simple pero lento.
+- **Harvard**: buses separados, más rápido.
+- **ARM**: eficiente, modular, SoC, RISC, usado en móviles.
+- **x86**: potente, retrocompatible, CISC, usado en PCs.
+- **Pipeline**: paralelismo interno, pero sensible a saltos y accesos a memoria.
+- **Multicore**: varios núcleos, más rendimiento si el software lo aprovecha.

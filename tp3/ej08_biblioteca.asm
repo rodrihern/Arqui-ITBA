@@ -21,9 +21,9 @@ read:
 
     push ebx    ; preservar ebx
     mov eax, 3
-    mov ebx, [ebp+8]    ; file descriptor (corrected offset)
-    mov ecx, [ebp+12]   ; char * buffer (corrected offset)
-    mov edx, [ebp+16]   ; size_t count (corrected offset)
+    mov ebx, [ebp+8]    ; file descriptor 
+    mov ecx, [ebp+12]   ; char * buffer 
+    mov edx, [ebp+16]   ; size_t count 
     int 80h
 
     pop ebx

@@ -1,76 +1,78 @@
+# Gestión de Memoria
+
 ## GDT y LDT
 
-La **GDT** (Global Descriptor Table) es una tabla utilizada por los procesadores x86 para definir las características de los diferentes segmentos de memoria globales del sistema, como su base, tamaño y privilegios de acceso. Es única para todo el sistema.
+La **GDT** (Global Descriptor Table) es una tabla utilizada por los procesadores x86 para definir las características de los diferentes segmentos de memoria globales del sistema, como su base, tamaño y privilegios de acceso. Es única para todo el sistema y permite la protección y separación de memoria entre el sistema operativo y los procesos.
 
-La **LDT** (Local Descriptor Table) es similar a la GDT, pero se utiliza para definir segmentos de memoria específicos para cada proceso o tarea. Cada proceso puede tener su propia LDT, permitiendo así diferentes espacios de memoria segmentada por proceso.
+La **LDT** (Local Descriptor Table) es similar a la GDT, pero se utiliza para definir segmentos de memoria específicos para cada proceso o tarea. Cada proceso puede tener su propia LDT, permitiendo así diferentes espacios de memoria segmentada por proceso. La GDT se mantiene fija y la LDT se cambia según el proceso activo.
 
-La GDT la mantenés y la LDT la vas cambiando.
+- La GDT agrega indirección y permisos.
+- Tiene un bit de presente, para indicar si el segmento está en memoria o debe ser traído desde disco (soporte para swapping).
+- Instrucciones privilegiadas (como `in`, `out`, `cli`, `sti`) solo pueden ser usadas en el nivel más alto de privilegio (kernel).
 
-la gdt agrega indireccion y permisos
-tambien tiene un bit de presente, para ver si lo bajo a disco o no lo bajo a disco
+## Segmentación
 
-las instrucciones de in y out junto con cli y sti, solo la pueden usar las aplicaciones qeu tienen el nivel mas alto de privilegios memoria virtual 
+La **segmentación** es una técnica de gestión de memoria donde la memoria se divide en segmentos de tamaño variable según la lógica del programa (código, datos, stack, etc.). Cada segmento tiene una base y un límite, y el acceso se controla mediante descriptores en la GDT/LDT.
 
-## Segmentacion
+**Ventajas:**
+- Permite protección y compartición de memoria.
+- Facilita la organización lógica del programa.
 
-TODO: completar
+**Desventajas:**
+- Fragmentación externa: los huecos libres pueden no ser contiguos.
+- Mayor complejidad en la gestión.
 
-## Paginacion
+## Paginación
 
-Divide al maña de memoria y a la memoria fisica en paginas de un tamaño fijo
+La **paginación** divide la memoria física y virtual en bloques de tamaño fijo llamados páginas (típicamente 4KB). El sistema operativo mantiene una tabla de páginas para cada proceso, que mapea páginas virtuales a marcos de páginas físicas.
 
-Genera mapeo de paginas virtuales a paginas fisicas
+**Ventajas:**
+- Elimina la fragmentación externa.
+- Permite compartir páginas entre procesos (por ejemplo, código de librerías).
+- Facilita la implementación de memoria virtual.
 
-Tiene esquema de permisos
-
-Ventaja: si hay muchos programas que quieren lo mismo puedo cargar eso en memoria una sola vez en una pagina fisica y que cada proceso tiene una pagina virtual que apunta a esa misma pagina fisica
-
-### De que tamaño tiene que ser 
-
-si achico mucho la pagina, se agranda mucho el indice, osea que pagina le diste a cada proceso
-
-para saber el tamaño de la pagina se elige la media de lo que ocupan los programas (intel dijo 4k cuando tenia la arquitectura de 32 bits) 
-
-me quedan 2^20 paginas. ahora de 32 bits:
-hay 20 bits que corresponden al numero de pagina, y los ultimos 12 corresponden al offset 
-(las primeras 5 letras en hexa son la pagina y las ultimas 3 son el offset)
+**Tamaño de página:**
+- Si la página es muy pequeña, la tabla de páginas es muy grande.
+- Si es muy grande, hay desperdicio de memoria (fragmentación interna).
+- En x86 de 32 bits, típicamente 4KB (20 bits para número de página, 12 bits para offset).
 
 ```
 31          11         0
 | nro de pag | offset | 
 ```
 
+- Se usan varias tablas: directorio de páginas (2^10 entradas), cada una apunta a una tabla de páginas (2^10 entradas), cada entrada apunta a una página física.
+- El registro `cr3` apunta al directorio de páginas del proceso activo.
 
-lo filetea en 3 para acceder a las tablas
+## Swapping y Memoria Virtual
 
-1 tabla de directorio con 2^10 entradas con un puntero a una tabla de paginas
+La **memoria virtual** permite que los procesos crean que tienen acceso a toda la memoria, aunque físicamente no sea así. El sistema operativo mueve páginas entre la RAM y el disco según sea necesario (swapping), usando el bit de presente en las tablas de páginas.
 
-cada una de las 2^10 paginas tiene 2^10 entradas, donde cada una apunta a una pagina
+- Si una página no está presente, se produce un **page fault** y el sistema la trae desde disco.
+- Permite ejecutar programas más grandes que la memoria física disponible.
 
-por cada aplicacion tengo un directorio y sus tablas de pagina
+## Memoria Caché
 
-el registro cr3 apunta al directorio
+La **memoria caché** está dentro del procesador y almacena datos e instrucciones usados recientemente para acelerar el acceso. Es mucho más rápida que la RAM, pero de menor capacidad (decenas de MB).
 
-TODO: pedirle a azu / mariu la foto del pizarron
+- Todas las peticiones del procesador a la memoria pasan primero por la caché.
+- Si el dato está en caché (**hit**), se accede rápido; si no (**miss**), se busca en RAM.
+- Existen varios niveles: L1 (más rápida y pequeña), L2, L3 (más grandes y lentas).
 
-### Paging y swapping
+## Multinúcleo (Multicore)
 
-...
+Tener varios núcleos en un procesador permite ejecutar varios hilos o procesos en paralelo, mejorando el rendimiento en tareas concurrentes y multitarea. Cada núcleo puede tener su propia caché L1 y compartir cachés L2/L3.
 
-## Memoria Cache
+**Ventajas:**
+- Mayor rendimiento en aplicaciones paralelizables.
+- Mejor respuesta en sistemas multitarea.
 
-Esta adentro del procesador, no hay que salir a buscar nada con el Bus de direcciones
+**Desafíos:**
+- Sincronización y coherencia de caché entre núcleos.
+- No todas las aplicaciones aprovechan múltiples núcleos.
 
-reducido (solo 15M mas o menos) pero full rapido
+## Preguntas frecuentes
 
-acelera como se ejecutan los ciclos (si hay algo que tiene que hacer muchas veces lo deja aca en la cache para no tener que ir a buscarlo todo el tiempo a la ram)
-
-va en medio de todas las peticiones del procesador a la memoria, todo pasa por la cache
-
-
-
-
-## Preguntas 
-
-* que implica que tenga varios nucleos un procesador
-* 
+- ¿Qué implica que tenga varios núcleos un procesador? (ver sección Multinúcleo)
+- ¿Cómo se elige el tamaño de página? (balance entre tamaño de tabla y fragmentación interna)
+- ¿Qué diferencia hay entre segmentación y paginación? (segmentación: bloques lógicos de tamaño variable; paginación: bloques físicos de tamaño fijo)
