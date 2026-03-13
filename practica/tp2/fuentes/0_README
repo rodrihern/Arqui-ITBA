@@ -1,0 +1,61 @@
+================================================================================
+Compilacion
+================================================================================
+Para generar el ejecutable, primero es necesario generar el archivo objeto, 
+
+$> nasm -f elf hello.asm
+
+Luego, es necesario linkearlo, y resolver los valores no resueltos.
+
+$> ld -m elf_i386 hello.o -o hello
+
+El programa está listo para correr, y ya poseé los permisos necesarios.
+
+$> ./hello
+
+
+================================================================================
+Para entender un poco mejor:
+================================================================================
+SYSCALLS:
+	Ejecute el programa con el programa strace, que intercepta y detecta las
+	llamadas al systema operativo
+
+	$> strace ./hello
+
+	Puede notar las syscalls que se utilizaron? Cuales son?
+
+	; Para ver otras syscalls, se puede entrar a la página:
+	; http://web.archive.org/web/20160213015253/http://docs.cs.up.ac.za/
+	; programming/asm/derick_tut/syscalls.html
+
+BSS:
+	Las zonas conceptualmente del binario de un programa son Datos (section
+	.data) Codigo (section .text) El objetivo es que data no sea ejecutable
+	pero si editable y código, no editable pero si ejecutable.
+
+	Ahora bien, los programas a veces necesitan memoria para realizar
+	operaciones, y dichos datos no estan inicializados. Para este espacio
+	existe la sección bss. Pensar el caso donde se quiere utilizar una
+	matriz de enteros 1024x1024 en tiempo de ejecucion sin datos
+	inicializados. Tiene sentido guardar 4M de basura?
+
+Ejercicio:
+	- Incrementar el tamano de placeholder en 2048, recompile
+	¿Cambio el tamaño del ejecutable?
+	- Mover placeholder a la seccion de datos.
+	¿Ahora?
+
+
+================================================================================
+Responsabilidad del Programador:
+================================================================================
+	Como se puede ver, en Assembler no hay tipos de datos, es
+	responsabilidad del programador darle el significado que corresponde.
+	
+	Que significa el 10, luego de la cadena? Es realmente el numero en
+	decimal 10? Tiene otro significado?
+
+
+
+

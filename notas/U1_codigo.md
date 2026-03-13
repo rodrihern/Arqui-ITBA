@@ -4,7 +4,7 @@ TODAS LAS DIRECCIONES DE MEMORIA OCUPAN 1 BYTE
 
 ## Registros
 
-![Registros](../images/registros_asm.jpg)
+![Registros](./attachments/registros_asm.jpg)
 
 Tambien están de R8 - R12
 
@@ -14,12 +14,12 @@ Tambien están de R8 - R12
 
 cuando se monta un programa con ld:
 
-![Stack](../images/stack.png)
+![Stack](./attachments/stack.png)
 
 con gcc:
 (despues de el armado del stack frame)
 
-![Stack](../images/stack_gcc.png)
+![Stack](./attachments/stack_gcc.png)
 
 las direcciones que estan mas abajo son mayores
 

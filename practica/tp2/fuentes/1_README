@@ -1,0 +1,42 @@
+================================================================================
+Compilacion
+================================================================================
+Para generar el ejecutable, primero es necesario generar el archivo objeto, 
+
+$> nasm -f elf hello.asm
+
+Luego, es necesario linkearlo, y resolver los valores no resueltos.
+
+$> ld -m elf_i386 hello.o -o hello
+
+El programa está listo para correr, y ya poseé los permisos necesarios.
+
+$> ./hello
+
+
+================================================================================
+Funciones
+================================================================================
+Las funciones son un elemento muy importante de la programación. Sirven para
+modularizar codigo, hacerlo más legible y facil de mantener.
+
+En Assembler, una función es solamente una dirección de memoria, definida con
+una etiqueta, a la cual se decide apuntar el registro EIP, y se guarda en el
+stack, la posición anterior. Cuando se ejecuta ret, se toma del stack la
+dirección (ó dato) que esté en ese lugar, para volver al punto de llamada
+anterior, y así "terminar" la función.
+
+Linux reserva una buena cantidad de espacio para nuestros programas en el Stack.
+Se puede obtener dicha información ejecutando el comando
+
+$> ulimit -s
+
+En caso de que el stack se complete, nuestro programa aborta.
+
+El pasaje de parámetros y retorno de datos es simplemente una convención. Por un
+tema de simplicidad, podemos empezar a trabajar pasando parámetros por registros
+y retornando los datos en eax.
+
+
+
+
