@@ -26,6 +26,7 @@ Cada cable del bus de datos es $D_0, D_1, ... , D_m$
 - **RAM** y **ROM** pierden información con el tiempo.
 - **Transferencia**: Tiempo que tarda en mandar/recibir un dato el microprocesador.
 - **Latencia**: Tiempo que tarda en leer/escribir la memoria.
+- Ver jerarquía de memoria (registros → caché → RAM → disco) en [[t1_introduccion#Memoria|SO - Introducción]].
 
 ### Comparación entre RAM y ROM
 
@@ -52,6 +53,7 @@ Cada cable del bus de datos es $D_0, D_1, ... , D_m$
 - En la 21h está el IMR, que es la máscara de interrupciones. Para que bootee tiene que estar todo en 1, pues se activa en 0 las interrupciones.
 - El teclado está en IRQ1, la máscara tiene IRQ7 en el bit más significativo (BMS) y IRQ0 en el menos significativo.
 - Para avisar que terminó (EOI), hay que mandar 20h al 20h.
+- Ver cómo el kernel maneja interrupciones en [[t1_introduccion#I/O (Input/Output)|SO - I/O]] y cómo se relacionan con las syscalls en [[t1_introduccion#System Calls|SO - System Calls]].
 
 ## Notas técnicas
 

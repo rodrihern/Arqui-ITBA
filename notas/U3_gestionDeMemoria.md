@@ -24,7 +24,7 @@ La **segmentación** es una técnica de gestión de memoria donde la memoria se 
 
 ## Paginación
 
-La **paginación** divide la memoria física y virtual en bloques de tamaño fijo llamados páginas (típicamente 4KB). El sistema operativo mantiene una tabla de páginas para cada proceso, que mapea páginas virtuales a marcos de páginas físicas.
+La **paginación** divide la memoria física y virtual en bloques de tamaño fijo llamados páginas (típicamente 4KB). El sistema operativo mantiene una tabla de páginas para cada proceso, que mapea páginas virtuales a marcos de páginas físicas. Ver más en [[t6_memoria#Paginacion|SO - Paginación]] y el manejo desde el SO en [[t6_memoria#Tablas multinivel|tablas multinivel]].
 
 **Ventajas:**
 - Elimina la fragmentación externa.
@@ -46,14 +46,14 @@ La **paginación** divide la memoria física y virtual en bloques de tamaño fij
 
 ## Swapping y Memoria Virtual
 
-La **memoria virtual** permite que los procesos crean que tienen acceso a toda la memoria, aunque físicamente no sea así. El sistema operativo mueve páginas entre la RAM y el disco según sea necesario (swapping), usando el bit de presente en las tablas de páginas.
+La **memoria virtual** permite que los procesos crean que tienen acceso a toda la memoria, aunque físicamente no sea así. El sistema operativo mueve páginas entre la RAM y el disco según sea necesario (swapping), usando el bit de presente en las tablas de páginas. Ver detalles de implementación en [[t6_memoria#Memoria virtual|SO - Memoria Virtual]] y algoritmos de reemplazo en [[t6_memoria#Algoritmos de remplazo de paginas|SO - Reemplazo de páginas]].
 
 - Si una página no está presente, se produce un **page fault** y el sistema la trae desde disco.
 - Permite ejecutar programas más grandes que la memoria física disponible.
 
 ## Memoria Caché
 
-La **memoria caché** está dentro del procesador y almacena datos e instrucciones usados recientemente para acelerar el acceso. Es mucho más rápida que la RAM, pero de menor capacidad (decenas de MB).
+La **memoria caché** está dentro del procesador y almacena datos e instrucciones usados recientemente para acelerar el acceso. Es mucho más rápida que la RAM, pero de menor capacidad (decenas de MB). Ver también [[U2_hardware#Memoria|Hardware]] para características de RAM y [[t1_introduccion#Memoria|SO - Jerarquía de memoria]].
 
 - Todas las peticiones del procesador a la memoria pasan primero por la caché.
 - Si el dato está en caché (**hit**), se accede rápido; si no (**miss**), se busca en RAM.

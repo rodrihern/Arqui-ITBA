@@ -33,7 +33,7 @@
 
 ## Pipeline
 
-El **pipeline** permite ejecutar varias instrucciones en paralelo, dividiendo la ejecución en etapas:
+El **pipeline** permite ejecutar varias instrucciones en paralelo, dividiendo la ejecución en etapas. Ver también cómo el SO lo tiene en cuenta en [[t1_introduccion#Procesador|SO - Procesador]].
 
 - **Fetch**: Buscar la instrucción en memoria.
 - **Decode**: Decodificar la instrucción.
@@ -61,6 +61,7 @@ fetch -> decode -> execute
 - Varios núcleos en un solo chip permiten ejecutar múltiples hilos/procesos en paralelo.
 - Cada núcleo puede tener su propia caché L1 y compartir L2/L3.
 - Mejora el rendimiento en aplicaciones paralelizables y sistemas multitarea.
+- Ver implicancias para IPC en [[t3_ipc#Modelos de IPC|SO - IPC]] y para threads en [[t4_threads|SO - Threads]].
 
 ## Comparación ARM vs x86
 | Característica         | ARM (RISC)         | x86 (CISC)         |

@@ -4,9 +4,9 @@ TODAS LAS DIRECCIONES DE MEMORIA OCUPAN 1 BYTE
 
 ## Registros
 
-![Registros](./attachments/registros_asm.jpg)
+![[registros_asm.jpg]]
 
-Tambien están de R8 - R12
+Tambien están de R8 - R12. Ver [[U2_hardware#Buses|hardware - buses de datos]] para entender por qué los registros tienen 32 o 64 bits según la arquitectura.
 
 
 
@@ -14,12 +14,12 @@ Tambien están de R8 - R12
 
 cuando se monta un programa con ld:
 
-![Stack](./attachments/stack.png)
+![[stack.png]]
 
 con gcc:
 (despues de el armado del stack frame)
 
-![Stack](./attachments/stack_gcc.png)
+![[stack_gcc.png]]
 
 las direcciones que estan mas abajo son mayores
 
@@ -69,6 +69,8 @@ gcc -c file.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwi
 
 
 ## Syscalls
+
+Ver cómo las maneja el kernel en [[t3_ipc|SO - IPC]] y [[t2_procesos|Procesos]]. Ver también [[t1_introduccion#System Calls|SO - Introducción]] para el mecanismo de TRAP y transición user/kernel.
 
 [Linux Syscall Reference](https://web.archive.org/web/20180806043517/http://syscalls.kernelgrok.com/)
 
@@ -174,7 +176,7 @@ section .bss
 
 ## Canary en el Stack
 
-El **canary** es un valor especial que se coloca en el stack entre las variables locales y la dirección de retorno de una función. Su propósito es detectar si se ha producido un desbordamiento de buffer que podría sobrescribir la dirección de retorno.
+El **canary** es un valor especial que se coloca en el stack entre las variables locales y la dirección de retorno de una función. Su propósito es detectar si se ha producido un desbordamiento de buffer que podría sobrescribir la dirección de retorno. Ver también [[U3_gestionDeMemoria#Segmentación|gestión de memoria]] para protección de segmentos.
 
 ### Funcionamiento:
 1. **Inicialización**: 
@@ -209,6 +211,8 @@ El **canary** es un valor especial que se coloca en el stack entre las variables
 
 
 ## Tamaño de Tipos de Datos
+
+Ver también la nota sobre el [[U2_hardware#Memoria|tamaño de direcciones de memoria]] (todas las direcciones Intel son de 1 byte). Los tamaños de `Pointer` (4 u 8 bytes) dependen del bus de direcciones: [[U2_hardware#Buses|hardware - buses]].
 
 | Tipo de Dato        | Tamaño (32-bit) | Tamaño (64-bit) | Notas                                     |
 | :------------------ | :-------------- | :-------------- | :---------------------------------------- |
