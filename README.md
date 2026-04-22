@@ -1,6 +1,6 @@
 # Arqui-ITBA
 
-azucarame la mambreta
+Notas y ejercicios de la catedra de Arquitectura de Computadoras
 
 ## Notas teóricas
 
