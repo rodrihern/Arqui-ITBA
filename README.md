@@ -1,6 +1,10 @@
-# Arqui-ITBA
+# Arqui-ITBA - Notas y Práctica
 
-Notas y ejercicios de la catedra de Arquitectura de Computadoras
+Este repositorio contiene el material de estudio y práctica para la materia Arquitectura de Computadoras:
+- **Notas de clase:** Apuntes detallados sobre Assembly x86-64, hardware, gestión de memoria y arquitecturas.
+- **Ejercicios de Parcial:** Práctica con ejercicios de exámenes viejos para practicar.
+- **Práctica:** Guías de ejercicios resueltas (Assembly y C).
+- **Material de apoyo:** Cartillas y referencias técnicas.
 
 ## Notas teóricas
 

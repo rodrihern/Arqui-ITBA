@@ -1,3 +1,8 @@
+---
+materia: arqui
+tipo: apuntes
+---
+
 # Assembly y C
 
 TODAS LAS DIRECCIONES DE MEMORIA OCUPAN 1 BYTE

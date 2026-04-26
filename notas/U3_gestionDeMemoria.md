@@ -1,3 +1,8 @@
+---
+materia: arqui
+tipo: apuntes
+---
+
 # Gestión de Memoria
 
 ## GDT y LDT

@@ -1,3 +1,8 @@
+---
+materia: arqui
+tipo: apuntes
+---
+
 # Hardware
 
 ## Buses
